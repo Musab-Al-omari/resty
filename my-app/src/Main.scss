@@ -1,0 +1,31 @@
+@mixin center {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form{
+    @include center;  
+}
+
+
+
+#buttons {
+  @include center;
+}
+div button {
+  margin: 2%;
+}
+button {
+  background-color: aqua;
+}
+#outerDiv{
+    @include center; 
+
+}
+#outPut{
+    padding-top: 2%;
+    background-color: rgb(196, 196, 196);
+    height: 25vh;
+    width: 50%;
+}
