@@ -19,6 +19,14 @@ class Main extends React.Component {
     }
 
     handleBtnClick = e => {
+        // let myBot = document.querySelector(".bot")
+        // console.log(myBot);
+        // if (myBot.style.backgroundColor==="rgb(" + 196 + "," + 196 + "," + 196 + ")") {
+        //     myBot.style.backgroundColor="rgb(" + 196 + "," + 196 + "," + 196 + ")"
+        // } else {
+        //     myBot.style.backgroundColor="rgb(" + 196 + "," + 100 + "," + 196 + ")"
+        // }
+        
         const reversed = e.target.innerText
         const newState = { ...this.state, routes: reversed };
         this.setState(newState);
@@ -26,18 +34,17 @@ class Main extends React.Component {
 
 
 
-    goHandler = e => {
+    goHandler = async e => {
         e.preventDefault()
-        let output = document.getElementById('outPut')
-        // function spaces(x) {
-        //     let res = '';
-        //     while (x--) res += ' ';
-        //     return res;
-        // }
-        // let x = spaces(10)
-        output.innerText = `${this.state.routes} =>  ${this.state.urlField}`
-
-
+       
+        let raw = await fetch(`${this.state.urlField}`)
+        let data = await raw.json()
+        //    let  jsonData=JSON.stringify(data)
+        // console.log('data',JSON.stringify(data));
+       
+        const count = data.count;
+        const result = data.results;
+        this.props.handler(data, result, count);
     }
 
     render() {
@@ -50,21 +57,12 @@ class Main extends React.Component {
                 </form>
                 <br />
                 <div id="buttons">
-                    <button onClick={this.handleBtnClick}>GET</button>
-                    <button onClick={this.handleBtnClick}>POST</button>
-                    <button onClick={this.handleBtnClick}>PUT</button>
-                    <button onClick={this.handleBtnClick}>DELETE</button>
-                </div>
-
-                <div id="outerDiv">
-                    <div id="outPut">
-
-                    </div>
+                    <button className="bot" onClick={this.handleBtnClick}>GET</button>
+                    <button className="bot" onClick={this.handleBtnClick}>POST</button>
+                    <button className="bot" onClick={this.handleBtnClick}>PUT</button >
+                    <button className="bot" onClick={this.handleBtnClick}>DELETE</button>
                 </div>
             </div>
-
-
-
         )
     }
 }
