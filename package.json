@@ -1,6 +1,5 @@
-{
-  "homepage": "http://Musab-Al-omari.github.io/my-app",
-  "name": "my-app",
+{ "name": "resty",
+  "homepage": "http://Musab-Al-omari.github.io/resty",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
