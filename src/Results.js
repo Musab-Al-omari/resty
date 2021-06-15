@@ -4,12 +4,15 @@ class Results extends React.Component {
 
     render() {
         //    let myObject=JSON.stringify(this.props.results)
-        let myObject = this.props.results
+        let myObject = this.props.body
+        let myHeaderObject = this.props.header
         return (
             <>
                 <div id="outerDiv">
                     <div id="outPut">
-                        <ReactJson src={myObject} />
+
+                        <ReactJson name="header" src={myHeaderObject} />
+                        <ReactJson name="response" src={myObject} />
                     </div>
                 </div>
 

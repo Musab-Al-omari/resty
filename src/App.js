@@ -1,8 +1,9 @@
 import React from 'react'
 import Header from './Header.js'
 import Footer from './Footer.js';
-import Main from './Main.js';
+import Form from './Form.js';
 import Results from './Results.js';
+import History from './History.js';
 import './App.css';
 
 class App extends React.Component {
@@ -12,12 +13,13 @@ class App extends React.Component {
     super(props)
     this.state = {
       body:{},
-      resultsArray: [],
+      headersObj:{},
       count: 0
     }
   }
-  handlerApi = (body,resultsArray, count) => {
-    this.setState({body,resultsArray,count})
+  handlerApi = (body, count,headersObj) => {
+   
+    this.setState({body,count,headersObj})
   }
 
 
@@ -28,8 +30,9 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Header />
-        <Main handler={this.handlerApi} />
-        <Results results={this.state.body}/>
+        <Form handler={this.handlerApi} />
+        <Results body={this.state.body} header={this.state.headersObj}/>
+        <History />
         <Footer />
       </React.Fragment >);
   }
