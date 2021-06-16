@@ -16,7 +16,7 @@ class App extends React.Component {
       body:{},
       headersObj:{},
       count: 0,
-      history: JSON.parse(localStorage.getItem('myHeader')),
+      history: JSON.parse(localStorage.getItem('myHeader')) || [],
       method:'GET',
       url:'https://api-server-0.herokuapp.com/food/',
       loading: false,
@@ -27,13 +27,13 @@ class App extends React.Component {
   handlerApi = (body, count,headersObj,status) => {
 
 
-    if (this.state.history) {
+   
       if (status<299) {
         this.setState({body,count,headersObj,history:[...this.state.history,{method:this.state.method,urlField:this.state.url}]})
       }else{
         this.setState({body,count,headersObj})
        }
-    }
+  
    
   }
   fillForm=(method, url)=>{
