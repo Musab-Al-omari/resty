@@ -7,8 +7,6 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            urlField: '',
-            routes: '',
             body: ''
         }
     }
@@ -17,9 +15,15 @@ class Form extends React.Component {
 
     handleURLChange = e => {
         const URL = e.target.value;
-        const newState = { ...this.state, urlField: URL };
-        this.setState(newState);
+        // const newState = { ...this.state, urlField: URL };
+        // this.setState(newState);
+        this.props.changeUrl(URL)
+        console.log(URL);
+        console.log('sad');
     }
+
+
+
     handlerBody = e => {
         let body = e.target.value;
         // console.log('text',text);
@@ -32,26 +36,28 @@ class Form extends React.Component {
 
     handleBtnClick = e => {
         const reversed = e.target.innerText
-        const newState = { ...this.state, routes: reversed };
-        this.setState(newState);
+        // const newState = { ...this.state, routes: reversed };
+        // this.setState(newState);
+        this.props.methodHandler(reversed)
     }
 
 
 
     goHandler = async e => {
         e.preventDefault()
+        this.props.loadingHandler(true);
         try {
-            if (this.state.routes === '') {
-                this.state.routes = 'GET'
+            if (this.props.method === '') {
+                this.props.method = 'GET'
             }
 
 
-            let myFetchObj = { method: `${this.state.routes}` }
+            let myFetchObj = { method: `${this.props.method}` }
 
-            if (this.state.routes === 'POST' || this.state.routes === 'PUT') {
+            if (this.props.method === 'POST' || this.props.method === 'PUT') {
                 let bodyData = this.state.body
                 myFetchObj = {
-                    method: this.state.routes,
+                    method: this.props.method,
                     mode: "cors",
                     headers: {
                         "Content-Type": "application/json",
@@ -60,11 +66,10 @@ class Form extends React.Component {
                 }
             }
 
-            let raw = await fetch(this.state.urlField, myFetchObj)
+            let raw = await fetch(this.props.url, myFetchObj)
             let data = await raw.json()
             const count = data.count;
 
-            console.log('data', raw);
 
             const headersObj = {}
             for (let h of raw.headers) {
@@ -76,13 +81,13 @@ class Form extends React.Component {
                 let prevLocalStorage = JSON.parse(localStorage.getItem('myHeader'))
 
                 if (prevLocalStorage) {
-                    localStorage.setItem('myHeader', JSON.stringify([...prevLocalStorage, { method: this.state.routes, urlField: this.state.urlField }]))
+                    localStorage.setItem('myHeader', JSON.stringify([...prevLocalStorage, { method: this.props.method, urlField: this.props.url }]))
                 } else {
-                    localStorage.setItem('myHeader', JSON.stringify([{ method: this.state.routes, urlField: this.state.urlField }]))
+                    localStorage.setItem('myHeader', JSON.stringify([{ method: this.props.method, urlField: this.props.url }]))
                 }
             };
-
-            this.props.handler(data, count, headersObj);
+            this.props.loadingHandler(false);
+            this.props.handler(data, count, headersObj,raw.status);
 
 
         } catch (error) {
@@ -97,7 +102,7 @@ class Form extends React.Component {
             <div>
                 <form>
                     <label htmlFor="theUrl">The URL:</label>
-                    <input onChange={this.handleURLChange} />
+                    <input value={this.props.url} onChange={this.handleURLChange} />
                     <textarea onChange={this.handlerBody} type="text"></textarea>
                     <button onClick={this.goHandler} >GO!</button>
                 </form>
