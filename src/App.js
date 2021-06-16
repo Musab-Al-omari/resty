@@ -25,7 +25,7 @@ class App extends React.Component {
     }
   }
   handlerApi = (body, count,headersObj,status) => {
-   if (status<299) {
+   if (status<299 && this.state.history) {
      this.setState({body,count,headersObj,history:[...this.state.history,{method:this.state.method,urlField:this.state.url}]})
    }else{
     this.setState({body,count,headersObj})
