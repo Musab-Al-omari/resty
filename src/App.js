@@ -18,7 +18,7 @@ class App extends React.Component {
       count: 0,
       history: JSON.parse(localStorage.getItem('myHeader')) || [],
       method:'GET',
-      url:'https://api-server-0.herokuapp.com/food/',
+      url:'https://api-server-0.herokuapp.com/food/1',
       loading: false,
 
 
@@ -29,7 +29,7 @@ class App extends React.Component {
 
    
       if (status<299) {
-        this.setState({body,count,headersObj,history:[...this.state.history,{method:this.state.method,urlField:this.state.url}]})
+        this.setState({body,count,headersObj,history:[...[this.state.history],{method:this.state.method,urlField:this.state.url}]})
       }else{
         this.setState({body,count,headersObj})
        }
