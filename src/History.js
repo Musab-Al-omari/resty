@@ -3,32 +3,33 @@ import './History.scss'
 
 
 class History extends React.Component {
-  constructor(props){
-    super(props)
-    this.state={
-      history: JSON.parse(window.localStorage.getItem('myHeader'))
-    }
-  }
-  renderHistory = () => {
-    if (!this.state.history) return null;
 
-    return this.state.history.map((element, index) => {
+  handlerClick = (method, url) => {
+    this.props.fillForm(method, url)
+  }
+
+
+  renderHistory = (history) => {
+    if (!history) return null;
+
+
+    return history.map((element, index) => {
       return (
-        <p key={index}>
+        <p key={index} onClick={() => this.handlerClick(element.method, element.urlField)}>
           {element.method} : {element.urlField}
         </p>
       );
     });
   };
 
-    render() {
-      return (
-        <div className="historyContainer">
-          <p className="historyLabel">History</p>
-          {this.renderHistory}
-        </div>
-      );
-    }
+  render() {
+    return (
+      <div className="historyContainer">
+        <p className="historyLabel">History</p>
+        {this.renderHistory(this.props.history)}
+      </div>
+    );
+  }
 }
 
 export default History;
