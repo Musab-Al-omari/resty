@@ -18,7 +18,7 @@ class App extends React.Component {
       count: 0,
       history: JSON.parse(localStorage.getItem('myHeader')) || [],
       method:'GET',
-      url:'https://api-server-0.herokuapp.com/food/',
+      url:'https://api-server-0.herokuapp.com/food/1',
       loading: false,
 
 
