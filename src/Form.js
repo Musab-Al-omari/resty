@@ -18,6 +18,8 @@ class Form extends React.Component {
         // const newState = { ...this.state, urlField: URL };
         // this.setState(newState);
         this.props.changeUrl(URL)
+        console.log(URL);
+        console.log('sad');
     }
 
 
@@ -43,6 +45,7 @@ class Form extends React.Component {
 
     goHandler = async e => {
         e.preventDefault()
+        this.props.loadingHandler(true);
         try {
             if (this.props.method === '') {
                 this.props.method = 'GET'
@@ -83,7 +86,7 @@ class Form extends React.Component {
                     localStorage.setItem('myHeader', JSON.stringify([{ method: this.props.method, urlField: this.props.url }]))
                 }
             };
-
+            this.props.loadingHandler(false);
             this.props.handler(data, count, headersObj,raw.status);
 
 

@@ -1,14 +1,12 @@
 @mixin center {
-    display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-form{
-    @include center;  
+form {
+  @include center;
 }
-
-
 
 #buttons {
   @include center;
@@ -19,13 +17,14 @@ div button {
 button {
   background-color: aqua;
 }
-#outerDiv{
-    @include center; 
-
+#outerDiv {
+  display: inline;
+  width: 100%;
 }
-#outPut{
-    padding-top: 2%;
-    background-color: rgb(196, 196, 196);
-    height: fit-content;
-    width: 50%;
+#outPut {
+  display: inline-grid;
+  padding-top: 2%;
+  background-color: rgb(196, 196, 196);
+  height: fit-content;
+  width: 50%;
 }

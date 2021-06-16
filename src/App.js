@@ -4,6 +4,7 @@ import Footer from './Footer.js';
 import Form from './Form.js';
 import Results from './Results.js';
 import History from './History.js';
+import Loading from './Loading';
 import './App.css';
 
 class App extends React.Component {
@@ -17,7 +18,8 @@ class App extends React.Component {
       count: 0,
       history: JSON.parse(localStorage.getItem('myHeader')),
       method:'GET',
-      url:'https://api-server-0.herokuapp.com/food/'
+      url:'https://api-server-0.herokuapp.com/food/',
+      loading: false,
 
 
     }
@@ -39,7 +41,9 @@ class App extends React.Component {
   methodHandler=(method)=>{
     this.setState({method})
   }
-
+  loadingHandler = (loading) => {
+    this.setState({ ...this.state, loading });
+  };
 
 
 
@@ -48,9 +52,10 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Header />
-        <Form handler={this.handlerApi} method={this.state.method} url={this.state.url} changeUrl={this.changeUrl} methodHandler={this.methodHandler} />
+        <Form handler={this.handlerApi} method={this.state.method} url={this.state.url} changeUrl={this.changeUrl} methodHandler={this.methodHandler} loadingHandler={this.loadingHandler} />
         <Results body={this.state.body} header={this.state.headersObj}/>
         <History history={this.state.history} fillForm={this.fillForm}/>
+        <Loading loading={this.state.loading} />
         <Footer />
       </React.Fragment >);
   }

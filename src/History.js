@@ -15,7 +15,7 @@ class History extends React.Component {
 
     return history.map((element, index) => {
       return (
-        <p key={index} onClick={() => this.handlerClick(element.method, element.urlField)}>
+        <p className='clickOn' key={index} onClick={() => this.handlerClick(element.method, element.urlField)}>
           {element.method} : {element.urlField}
         </p>
       );
