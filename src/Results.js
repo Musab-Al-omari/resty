@@ -10,7 +10,6 @@ class Results extends React.Component {
             <>
                 <div id="outerDiv">
                     <div id="outPut">
-
                         <ReactJson name="header" src={myHeaderObject} />
                         <ReactJson name="response" src={myObject} />
                     </div>

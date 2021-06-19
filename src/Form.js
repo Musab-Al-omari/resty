@@ -12,7 +12,6 @@ class Form extends React.Component {
     }
 
 
-
     handleURLChange = e => {
         const URL = e.target.value;
         // const newState = { ...this.state, urlField: URL };
@@ -81,13 +80,13 @@ class Form extends React.Component {
                 let prevLocalStorage = JSON.parse(localStorage.getItem('myHeader'))
 
                 if (prevLocalStorage) {
-                    localStorage.setItem('myHeader', JSON.stringify([...prevLocalStorage, { method: this.props.method, urlField: this.props.url }]))
+                    localStorage.setItem('myHeader', JSON.stringify([...prevLocalStorage, { method: this.props.method, urlField: this.props.url, headersObj: headersObj, body: data }]))
                 } else {
-                    localStorage.setItem('myHeader', JSON.stringify([{ method: this.props.method, urlField: this.props.url }]))
+                    localStorage.setItem('myHeader', JSON.stringify([{ method: this.props.method, urlField: this.props.url, headersObj: headersObj, body: data }]))
                 }
             };
             this.props.loadingHandler(false);
-            this.props.handler(data, count, headersObj,raw.status);
+            this.props.handler(data, count, headersObj, raw.status);
 
 
         } catch (error) {

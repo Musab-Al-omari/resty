@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <footer>
             <h4>
-                &copy; Musab al omari website 6/13/2021
+                &copy; <a href="https://github.com/Musab-Al-omari">Musab al omari </a>website 6/13/2021
             </h4>
         </footer>
     )
